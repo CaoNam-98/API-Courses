@@ -38,8 +38,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'courses.apps.CoursesConfig',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg',
+    'oauth2_provider',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+}
+
+# Mình đặt 2 thông số này để khi client gọi đến thì sẽ vào đây để lấy => giúp bảo mật hơn
+OAUTH2_INFO = {
+    "client_id": "g6aQ99GezUYcW3Ps2na2UjDmc3jeVTuNsU56xpn0",
+    "client_serect": "pbkdf2_sha256$320000$JJadUqV9fdrMZbU2wtQ0j0$syOQ1R+lySMYAgx80n+ZZ+11xl9UM3cp6scr5JfJmQs="
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,3 +150,4 @@ AUTH_USER_MODEL = 'courses.User'
 # %s/courses/static Tiếp theo nối với courses/static => ecoursesv2/courses/static
 # ecoursesv2/courses/static + biến upload_to bên model định nghĩa class
 MEDIA_ROOT = '%s/courses/static' % BASE_DIR
+
